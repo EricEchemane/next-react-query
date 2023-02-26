@@ -25,4 +25,18 @@ describe('/api/todos', () => {
 			expect(data).toEqual([]);
 		});
 	});
+
+	describe('POST', () => {
+		it('should return 200 response', async () => {
+			httpMock = createMocks({
+				method: 'POST',
+				body: {
+					title: 'Test',
+				},
+			});
+			const { req, res } = httpMock;
+			await todosApiHandler(req, res);
+			expect(res._getStatusCode()).toBe(200);
+		});
+	});
 });
