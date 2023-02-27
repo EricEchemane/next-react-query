@@ -5,13 +5,18 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { useTodosQuery } from '@/queries/todos';
 
 jest.mock('@/queries/todos', () => ({
+	__esModule: true,
+	...jest.requireActual('@/queries/todos'),
 	useTodosQuery: jest.fn(),
 }));
 
 describe('HomePage', () => {
-	it('should not render the loading state', async () => {
-		(useTodosQuery as jest.Mock).mockReturnValueOnce({
-			isLoading: true,
+	it('should render the loading state', async () => {
+		(useTodosQuery as jest.Mock).mockImplementationOnce(() => {
+			return {
+				isLoading: true,
+				data: null,
+			};
 		});
 
 		const queryClient = new QueryClient();
@@ -26,8 +31,8 @@ describe('HomePage', () => {
 
 		expect(useTodosQuery).toHaveBeenCalled();
 
-		const noTodosYet = screen.queryByText('Loading...');
-		expect(noTodosYet).toBeInTheDocument();
+		const loading = screen.queryByText('Loading...');
+		expect(loading).toBeInTheDocument();
 	});
 
 	it('should not render todos yet if there is no data', async () => {
