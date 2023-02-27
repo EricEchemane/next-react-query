@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import { Todo } from '@/interfaces/todo.int';
 import { useTodosQuery } from '@/queries/todos';
+import AddTodoForm from '@/components/AddTodoForm';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -30,6 +31,10 @@ export default function Home() {
 
 			<main className={inter.className}>
 				<h1>Todos</h1>
+
+				<br />
+				<AddTodoForm />
+				<br />
 
 				{todos.isLoading ? (
 					<div>Loading...</div>
