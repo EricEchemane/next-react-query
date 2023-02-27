@@ -9,6 +9,27 @@ jest.mock('@/queries/todos', () => ({
 }));
 
 describe('HomePage', () => {
+	it('should not render the loading state', async () => {
+		(useTodosQuery as jest.Mock).mockReturnValueOnce({
+			isLoading: true,
+		});
+
+		const queryClient = new QueryClient();
+
+		await act(async () =>
+			render(
+				<QueryClientProvider client={queryClient}>
+					<HomePage />
+				</QueryClientProvider>
+			)
+		);
+
+		expect(useTodosQuery).toHaveBeenCalled();
+
+		const noTodosYet = screen.queryByText('Loading...');
+		expect(noTodosYet).toBeInTheDocument();
+	});
+
 	it('should not render todos yet if there is no data', async () => {
 		(useTodosQuery as jest.Mock).mockReturnValueOnce({
 			data: [],
