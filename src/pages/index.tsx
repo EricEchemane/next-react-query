@@ -1,14 +1,12 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
-import { useQuery } from 'react-query';
 import { Todo } from '@/interfaces/todo.int';
+import { useTodosQuery } from '@/queries/todos';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-	const todos = useQuery('todos', () =>
-		fetch('/api/todos').then((res) => res.json())
-	);
+	const todos = useTodosQuery();
 
 	const hasTodos = todos.data?.length > 0;
 
@@ -34,7 +32,7 @@ export default function Home() {
 				<h1>Todos</h1>
 
 				{todos.isLoading ? (
-					<p>Loading...</p>
+					<div>Loading...</div>
 				) : (
 					<ul>
 						{hasTodos &&
