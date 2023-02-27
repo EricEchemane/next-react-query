@@ -4,6 +4,8 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 jest.mock('@/queries/todos', () => ({
+	__esModule: true,
+	...jest.requireActual('@/queries/todos'),
 	useTodoMutation: jest.fn().mockReturnValue({ mutate: jest.fn() }),
 }));
 
