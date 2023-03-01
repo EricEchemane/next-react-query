@@ -6,6 +6,10 @@ const todos: Todo[] = [
 		id: 1,
 		title: 'Todo 1',
 	},
+	{
+		id: 1,
+		title: 'Todo 1',
+	},
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
