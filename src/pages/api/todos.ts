@@ -1,7 +1,12 @@
 import { Todo } from '@/interfaces/todo.int';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const todos: Todo[] = [];
+const todos: Todo[] = [
+	{
+		id: 1,
+		title: 'Todo 1',
+	},
+];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	const { method } = req;
