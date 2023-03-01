@@ -26,7 +26,7 @@ export default function AddTodoForm() {
 				placeholder='Add todo'
 				type='text'
 			/>
-			<button type='submit'>Add</button>
+			{/*<button type='submit'>Add</button>*/}
 		</form>
 	);
 }
