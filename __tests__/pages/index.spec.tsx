@@ -3,6 +3,14 @@ import HomePage from '@/pages/index';
 import { act, render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useTodosQuery } from '@/queries/todos';
+import { useRef } from 'react';
+
+jest.mock('@formkit/auto-animate/react', () => ({
+	useAutoAnimate: () => {
+		const ref = useRef();
+		return [ref];
+	},
+}));
 
 jest.mock('@/queries/todos', () => ({
 	__esModule: true,

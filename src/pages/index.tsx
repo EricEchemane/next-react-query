@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { Todo } from '@/interfaces/todo.int';
 import { useTodosQuery } from '@/queries/todos';
 import AddTodoForm from '@/components/AddTodoForm';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -10,6 +11,8 @@ export default function Home() {
 	const todos = useTodosQuery();
 
 	const hasTodos = todos.data?.length > 0;
+
+	const [parent] = useAutoAnimate();
 
 	return (
 		<>
@@ -39,7 +42,7 @@ export default function Home() {
 				{todos.isLoading ? (
 					<div>Loading...</div>
 				) : (
-					<ul>
+					<ul ref={parent}>
 						{hasTodos &&
 							todos.data.map((todo: Todo) => (
 								<li key={todo.id}>{todo.title}</li>
