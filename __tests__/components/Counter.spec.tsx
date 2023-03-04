@@ -22,7 +22,7 @@ describe('Counter component', () => {
 	});
 
 	it('should increment the counter when increment button is clicked', () => {
-		const incrementButton = screen.getByTestId('increment');
+		const incrementButton = screen.getByText('increment');
 		expect(incrementButton).toBeDefined();
 		fireEvent.click(incrementButton);
 
@@ -32,7 +32,7 @@ describe('Counter component', () => {
 	});
 
 	it('should decrement the counter when decrement button is clicked', () => {
-		const decrementButton = screen.getByTestId('decrement');
+		const decrementButton = screen.getByText('decrement');
 
 		expect(decrementButton).toBeDefined();
 		fireEvent.click(decrementButton);
@@ -43,7 +43,7 @@ describe('Counter component', () => {
 	});
 
 	it('should increment the counter by 5', () => {
-		const incrementByAmountButton = screen.getByTestId('incrementByAmount');
+		const incrementByAmountButton = screen.getByText('increment by 5');
 
 		expect(incrementByAmountButton).toBeDefined();
 		fireEvent.click(incrementByAmountButton);
@@ -53,7 +53,7 @@ describe('Counter component', () => {
 	});
 
 	it('should reset the counter back to zero', () => {
-		const resetButton = screen.getByTestId('reset');
+		const resetButton = screen.getByText('reset');
 
 		expect(resetButton).toBeDefined();
 		fireEvent.click(resetButton);
