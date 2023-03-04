@@ -4,6 +4,7 @@ import { Todo } from '@/interfaces/todo.int';
 import { useTodosQuery } from '@/queries/todos';
 import AddTodoForm from '@/components/AddTodoForm';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import Counter from '@/components/Counter';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,6 +36,8 @@ export default function Home() {
 			<main className={inter.className}>
 				<h1>Todos</h1>
 
+				<br />
+				<Counter />
 				<br />
 				<AddTodoForm />
 				<br />

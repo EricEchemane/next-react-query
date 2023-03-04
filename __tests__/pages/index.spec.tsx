@@ -4,6 +4,8 @@ import { act, render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useTodosQuery } from '@/queries/todos';
 import { useRef } from 'react';
+import counterStore from '@/stores';
+import { Provider as ReduxProvider } from 'react-redux';
 
 jest.mock('@formkit/auto-animate/react', () => ({
 	useAutoAnimate: () => {
@@ -18,6 +20,20 @@ jest.mock('@/queries/todos', () => ({
 	useTodosQuery: jest.fn(),
 }));
 
+const renderComponent = async () => {
+	const queryClient = new QueryClient();
+
+	await act(async () =>
+		render(
+			<QueryClientProvider client={queryClient}>
+				<ReduxProvider store={counterStore}>
+					<HomePage />
+				</ReduxProvider>
+			</QueryClientProvider>
+		)
+	);
+};
+
 describe('HomePage', () => {
 	it('should render the loading state', async () => {
 		(useTodosQuery as jest.Mock).mockImplementationOnce(() => {
@@ -27,15 +43,7 @@ describe('HomePage', () => {
 			};
 		});
 
-		const queryClient = new QueryClient();
-
-		await act(async () =>
-			render(
-				<QueryClientProvider client={queryClient}>
-					<HomePage />
-				</QueryClientProvider>
-			)
-		);
+		await renderComponent();
 
 		expect(useTodosQuery).toHaveBeenCalled();
 
@@ -48,15 +56,7 @@ describe('HomePage', () => {
 			data: [],
 		});
 
-		const queryClient = new QueryClient();
-
-		await act(async () =>
-			render(
-				<QueryClientProvider client={queryClient}>
-					<HomePage />
-				</QueryClientProvider>
-			)
-		);
+		await renderComponent();
 
 		expect(useTodosQuery).toHaveBeenCalled();
 
@@ -71,15 +71,7 @@ describe('HomePage', () => {
 		];
 		(useTodosQuery as jest.Mock).mockReturnValueOnce({ data });
 
-		const queryClient = new QueryClient();
-
-		await act(async () =>
-			render(
-				<QueryClientProvider client={queryClient}>
-					<HomePage />
-				</QueryClientProvider>
-			)
-		);
+		await renderComponent();
 
 		expect(useTodosQuery).toHaveBeenCalled();
 
