@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		".next": true,
+		".swc": true,
+		"coverage": true,
+		"node_modules": true,
+		".eslintrc.json": true
+	}
+}
